@@ -46,23 +46,63 @@ public class AddressBookInterface implements AddressBookService {
     }
 
     @Override
-    public void editPerson() {
+      public void editPerson(String openFilepath) throws IOException {
+		Person p = new Person();
+		// To show the All Entry , User can Identify index number
+		printEntry(openFilepath);
+
+		System.out.println("Enter the Index Number :");
+		int index = Utility.inputNumber();
+
 
     }
 
     @Override
     public void deletePerson() {
-
+         Person obj = getName();
+        if(obj != null ){
+            addressBook.remove(obj);
+            System.out.println("Contact deleted");
+            save();
+        }else{
+            System.out.println("Contact not found.");
+        }
     }
+
 
     @Override
     public void display(){
-        book.displayContacts();
-        System.out.println("lmpl");
+         for(Person obj : addressBook){
+            System.out.println("------------------");
+            System.out.println("Name: "+obj.getName());
+            System.out.println("Address: "+obj.getAddress());
+            System.out.println("Phone: "+obj.getPhone());
+        }
     }
-
+    
     @Override
     public void save(){
-        book.save();
+         CSVWriter.writeAll(addressBook);
+    }
+}
+ // To Sort All ZipCode
+	private ArrayList<Integer> sortAllZip(List<Person> personsList) {
+		ArrayList<Integer> sort = new ArrayList<>();
+		for (Person p : personsList) {
+			sort.add(p.getZip());
+		}
+		Collections.sort(sort);
+		return sort;
+	}
+// Search in Address book with First name input
+    private Person serach(String firstName){
+        Person returnObj = null;
+        for(Person obj : addressBook){
+            if(firstName.equalsIgnoreCase(obj.getFirstName())){
+                returnObj = obj;
+                break;
+            }
+        }
+        return returnObj;
     }
 }
