@@ -4,7 +4,7 @@ import com.bridgelabz.codeinclub.utils.AddressBook;
 import com.bridgelabz.codeinclub.utils.AddressBookUtil;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 import com.bridgelabz.codeinclub.modles.Person;
 
@@ -47,13 +47,25 @@ public class AddressBookInterface implements AddressBookService {
 
     @Override
       public void editPerson(String openFilepath) throws IOException {
-		Person p = new Person();
-		// To show the All Entry , User can Identify index number
-		printEntry(openFilepath);
-
-		System.out.println("Enter the Index Number :");
-		int index = Utility.inputNumber();
-
+		 Person person = getFirstName();
+        if(person!= null ){
+        System.out.print("Edit person's Address: ");
+        final String address = AddressBookUtil.getUserString();
+        person.setAddress(address);
+        System.out.print("Edit person's City: ");
+        final String city =  AddressBookUtil.getUserString();
+        person.setCity(city);
+		System.out.print("Edit person's State: ");
+        final String state = AddressBookUtil.getUserString();
+        person.setState(state);
+		System.out.print("Edit person's pincode: ");
+        final String pinCode = AddressBookUtil.getUserString();
+        person.setPinCode(pinCode);
+        System.out.print("Edit person's Phone number: ");
+        final String phone = AddressBookUtil.getUserString();
+        person.setPhone(phone);
+        }
+    }
 
     }
 
