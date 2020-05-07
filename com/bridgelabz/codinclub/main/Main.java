@@ -11,7 +11,7 @@ Handler: This class contains main class and handles everyother package and class
 @author aravind
 */
 public class Main {
-    public static void main(String[] dp){
+    public static void main(String[] args){
         final AddressBookService addressBookService = new AddressBookServiceImpl(new AddressBook());
         System.out.println("Welcome to address book");
         while(true){
